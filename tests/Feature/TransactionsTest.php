@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Account;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -60,6 +61,19 @@ class TransactionsTest extends TestCase
         ]);
 
         $response->assertStatus(400);
+    }
+
+    /** @test */
+    public function cannot_create_null_transaction_from_endpoint()
+    {
+        $account = factory(Account::class)->create();
+
+        $response = $this->post(route('api.accounts.transactions.store', $account->id), [
+            'amount' => null,
+            'date' => null
+        ]);
+
+        $response->assertStatus(302);
     }
 
     /** @test */

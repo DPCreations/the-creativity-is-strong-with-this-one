@@ -6,12 +6,12 @@ Should the date of the transaction always be "now"? This would be weird, then we
 
 This would also mean that the balance of an account only should calculate transactions that's in the past.
 
- Should the description be nullable? I think it should. We'll make it nullable.
+Should the description be nullable? I think it should. We'll make it nullable.
  
- It seems a little weird to have transaction storage and listing in one controller, and deletion in another controller. However, the deletion process doesn't have anything to do with the accounts, so for now I'll leave it as is.
+It seems a little weird to have transaction storage and listing in one controller, and deletion in another controller. However, the deletion process doesn't have anything to do with the accounts, so for now I'll leave it as is.
  
- To ensure that "now" will not throw an error for being in the past, I'm going to use both Carbon inPast() and carbon inSameMinute().
+To ensure that "now" will not throw an error for being in the past, I'm going to use both Carbon inPast() and carbon inSameMinute().
  
-   
- 
- 
+In the function calculating the balance for an account, we could accept two parameters. One being the start date, and one being the end date. That way we could get the balance for a given interval, but I don't think this is going to be relevant in this case. 
+
+I'm going to add a custom exception for Transactions, for more clarity about potential issues when running tests.
