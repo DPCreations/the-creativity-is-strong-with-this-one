@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Account;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
