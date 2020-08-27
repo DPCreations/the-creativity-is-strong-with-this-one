@@ -42,7 +42,7 @@ class Account extends Model
      * @return object
      * @throws TransactionException
      */
-    public function newTransaction($amount, $date = null, $description = null)
+    public function charge($amount, $date = null, $description = null)
     {
         $date = $date ? $date : Carbon::now();
 

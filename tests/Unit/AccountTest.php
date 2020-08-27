@@ -17,7 +17,7 @@ class AccountTest extends TestCase
         $this->expectException(TransactionException::class);
         $this->expectExceptionMessage("Missing amount for transaction.");
 
-        $account->newTransaction(null, null);
+        $account->charge(null, null);
     }
 
     /** @test */
@@ -26,7 +26,7 @@ class AccountTest extends TestCase
         $account = factory(Account::class)->create();
 
         for($i = 1; $i < 6; $i++) {
-            $account->newTransaction(100, Carbon::now()->addDays(-$i));
+            $account->charge(100, Carbon::now()->addDays(-$i));
         }
 
         $this->assertEquals(500, $account->balance);
@@ -38,11 +38,11 @@ class AccountTest extends TestCase
         $account = factory(Account::class)->create();
 
         for($i = 1; $i < 6; $i++) {
-            $account->newTransaction(100, Carbon::now()->addDays(-$i));
+            $account->charge(100, Carbon::now()->addDays(-$i));
         }
 
         for($i = 1; $i < 6; $i++) {
-            $account->newTransaction(100, Carbon::now()->addDays($i));
+            $account->charge(100, Carbon::now()->addDays($i));
         }
 
         $this->assertEquals(500, $account->balance);

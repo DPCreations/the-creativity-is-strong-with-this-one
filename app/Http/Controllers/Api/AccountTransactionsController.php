@@ -38,7 +38,7 @@ class AccountTransactionsController extends Controller
             return response('error', 400);
         }
 
-        $account->newTransaction(request('amount'), $date);
+        $account->charge(request('amount'), $date);
 
         return response('success', 201);
     }

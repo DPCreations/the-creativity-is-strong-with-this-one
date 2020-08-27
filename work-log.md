@@ -14,4 +14,10 @@ To ensure that "now" will not throw an error for being in the past, I'm going to
  
 In the function calculating the balance for an account, we could accept two parameters. One being the start date, and one being the end date. That way we could get the balance for a given interval, but I don't think this is going to be relevant in this case. 
 
-I'm going to add a custom exception for Transactions, for more clarity about potential issues when running tests.
+I'm going to add a custom exception for Transactions, for more clarity about potential issues when running tests (and when looking at Bugsnag, Sentry og the likes).
+
+Going over the code again, I've renamed the newTransaction function on the Account model to charge instead. I think it's more descriptive. 
+
+A note on the findOrFail method: it could be replaced with a simple find, and then a check which would allow us to create a more specific error message. Although I think this would look better in tests, I believe you're sacrificing a bit of the readibility that Laravel offers. 
+
+Also, I'm very aware of the fact that this API is open to everyone. In the real world, this would probably be build into some sort of existing system, and therefore I've gone ahead and assumed that the access control is taken care of. It could easily be build into the system, using Laravels authentication and Sanctum for API authentication.  

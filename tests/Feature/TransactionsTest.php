@@ -24,6 +24,14 @@ class TransactionsTest extends TestCase
     }
 
     /** @test */
+    public function displays_error_when_passing_unknown_id()
+    {
+        $response = $this->get(route('api.accounts.transactions.index', 1));
+
+        $response->assertStatus(404);
+    }
+
+    /** @test */
     public function can_create_positive_transaction()
     {
         $account = factory(Account::class)->create();
@@ -79,7 +87,7 @@ class TransactionsTest extends TestCase
     public function can_delete_transaction()
     {
         $account = factory(Account::class)->create();
-        $transaction = $account->newTransaction(100, Carbon::now());
+        $transaction = $account->charge(100, Carbon::now());
 
         $response = $this->post(route('api.transactions.destroy', $transaction->id));
 
